@@ -1,4 +1,5 @@
 const path = require("path");
+const dotenv = require("dotenv").config({ path: __dirname + "/.env" });
 
 module.exports = {
   context: __dirname,
@@ -9,6 +10,9 @@ module.exports = {
     publicPath: "/",
   },
   mode: process.env.NODE_ENV,
+  node: {
+    fs: "empty",
+  },
   devServer: {
     historyApiFallback: true,
   },

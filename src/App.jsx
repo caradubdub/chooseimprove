@@ -1,53 +1,55 @@
+require("dotenv").config();
 import React, { useEffect, useState, useRef } from "react";
 import GlobalStyle from "./styles/global";
 import {
   StyledPage,
-  StyledLeftPanel,
+  StyledTopPanel,
   StyledRightPanel,
 } from "../src/styles/styled";
 import styled from "styled-components";
 import DropDown from "./components/DropDown";
+import Description from "./components/Description";
 
+console.log(process.env);
 var Airtable = require("airtable");
-Airtable.configure({
-  endpointUrl: "https://api.airtable.com",
-  apiKey: "keyVYdVRJdKVpuQtq",
-});
-var base = Airtable.base("appk8Vq73Nru1TXvz");
+const base = new Airtable({
+  apiKey: "",
+}).base("appk8Vq73Nru1TXvz");
 
 const StyledButton = styled.button`
-  padding: 10px 30px 10px 30px;
-  position: fixed;
+  padding: 8px 20px 8px 20px;
   top: 70vh;
   z-index: 0;
   font: inherit;
-  color: white;
-  background-color: #29bc90;
-  border: 0.5px solid #29bc90;
-  border-radius: 5px;
+  color: #fffbf5;
+  background-color: #f4c430;
+  border: 0.5px solid #f4c430;
+  border-radius: 30px;
   &:hover {
-    background-color: #219170;
+    background-color: #f3d371;
+    border: 0.5px solid #f3d371;
   }
   cursor: pointer;
 `;
 
 const StyledText = styled.h1`
-  font-size: 54px;
+  font-size: 30px;
   align-self: center;
   text-align: center;
   flex-basis: 20%;
   margin-bottom: 10px;
-  color: white;
+  color: #12355b;
 `;
-
+//bring in the width limit of the card so there's no need to add background color, but have the abiilty to add background color
+//
 const StyledCard = styled.div`
   display: flex;
   flex-direction: column;
-  width: 55vw;
+  width: 50vw;
   height: auto;
-  padding: 20px;
-  border-radius: 5px;
-  background-color: #a5ebd6;
+  padding: auto;
+  border-radius: 20px;
+  background-color: transparent;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -88,7 +90,7 @@ function Typer(props) {
 
   return (
     <StyledText>
-      <span style={{ color: "white" }}>{text}</span>
+      <span style={{ color: "#12355B" }}>{text}</span>
       <span id="cursor" />
     </StyledText>
   );
@@ -105,6 +107,9 @@ function App() {
       Notes: "",
     },
   });
+  const [description, setDesc] = useState([
+    "Choose a category and click go to start!",
+  ]);
 
   useEffect(() => {
     /**
@@ -135,7 +140,6 @@ function App() {
       //need to add async functionality to wait to collect results before populating
       await base("Improve Exercises")
         .select({
-          // Selecting the first 3 records in Master View:
           view: "Master View",
         })
         .eachPage(
@@ -165,7 +169,13 @@ function App() {
               let idx = Math.floor(Math.random() * arr.length);
               console.log("idx", idx);
               setPrompt(arr[idx]);
-              console.log(prompt);
+              console.log("description", prompt.fields.Description);
+              // let split = prompt.fields.Description.split("");
+              // console.log("split1", split);
+              // console.log("type of field", typeof prompt.fields.Description);
+              let newstr = prompt.fields.Description.split(/\n/gi);
+              console.log(newstr);
+              setDesc(newstr);
               return;
             }
           }
@@ -252,44 +262,78 @@ function App() {
   };
   return (
     <StyledPage>
-      <StyledLeftPanel>
-        <StyledText style={{ paddingTop: "2rem" }}>
-          Today I want to improve...
-        </StyledText>
-        <Typer
-          dataText={[
-            "joy",
-            "creativity",
-            "connection",
-            "humor",
-            "energy",
-            "resilience",
-            "focus",
-            "self-awareness",
-            "gratitude",
-            "adaptability",
-            "achievement",
-          ]}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          boxShadow: "0 9px 5px -2px lightgray",
+        }}
+      >
+        <img
+          style={{ width: "20vw", padding: "10px 0 10px 20px" }}
+          src="https://static1.squarespace.com/static/5fdbcb0c485f552352d42446/t/5feb4ef5be26463ba9454d6b/1610900141277/?format=1500w"
         />
-        <div ref={wrapperRef}>
-          <DropDown
-            title="Choose Category"
-            list={location}
-            resetThenSet={resetThenSet}
-            isListOpen={isListOpen}
-            setIsListOpen={setIsListOpen}
-            toggleList={toggleList}
-          />
+      </div>
+      <StyledTopPanel>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <StyledText style={{ paddingTop: "2rem" }}>
+              Today I want to improve...
+            </StyledText>
+            {
+              // <Typer
+              //   dataText={[
+              //     "joy",
+              //     "creativity",
+              //     "connection",
+              //     "humor",
+              //     "energy",
+              //     "resilience",
+              //     "focus",
+              //     "self-awareness",
+              //     "gratitude",
+              //     "adaptability",
+              //     "achievement",
+              //   ]}
+              // />
+            }
+            <div>
+              <img
+                style={{ width: "30vw" }}
+                src="https://images.squarespace-cdn.com/content/v1/5fdbcb0c485f552352d42446/1610895013646-BFWFN6UBFIXP13ATSXXW/ke17ZwdGBToddI8pDm48kL8B3dm5W1mn-onLqnk26fJZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIK_FmWmlZglY2AzqA3xXvLLNSddWHUhxiZ7r7T7sSjs8/improve-home2.gif"
+                alt="improve-home2.gif"
+              />
+            </div>
+            <div ref={wrapperRef}>
+              <DropDown
+                title="Choose Category"
+                list={location}
+                resetThenSet={resetThenSet}
+                isListOpen={isListOpen}
+                setIsListOpen={setIsListOpen}
+                toggleList={toggleList}
+              />
+            </div>
+            <StyledButton onClick={handleClick}>Go!</StyledButton>
+          </div>
         </div>
-        <StyledButton onClick={handleClick}>Go!</StyledButton>
-      </StyledLeftPanel>
+      </StyledTopPanel>
       <StyledRightPanel>
         <StyledCard>
           <div>
             <h1>{prompt.fields.Name}</h1>
-          </div>
-          <div>
-            <StyledP>{prompt.fields.Description}</StyledP>
+            <Description description={prompt.fields.Description} />
+            <StyledP>{prompt.fields.Notes}</StyledP>
+            {
+              //try to add line breaks to description with string manipulationg
+            }
           </div>
         </StyledCard>
       </StyledRightPanel>

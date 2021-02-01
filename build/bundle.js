@@ -81,6 +81,8 @@ ul {
   order: 1;
 `,f=l.c.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex: 1 1 60%;
   background: white;
   order: 2;
@@ -93,8 +95,6 @@ ul {
   display: flex;
   width: 15rem;
   font-size: 1.2rem;
-  align-items: center;
-  justify-content: space-between;
   position: relative;
   border: 1px solid rgb(223, 223, 223);
   border-radius: 3px;
@@ -102,14 +102,17 @@ ul {
   line-height: 38px;
   cursor: default;
   cursor: pointer;
+  justify-content: center;
+  padding-right: 7px;
 `,m=l.c.div`
   margin: 2px 20px;
   margin-right: 30px;
   font-weight: 300;
 `,y=l.c.div`
-  position: absolute;
+  position: relative;
+  overflow-y: auto;
   z-index: 10;
-  width: 100%;
+  width: 15rem;
   max-height: 215px;
   border: 1px solid rgb(223, 223, 223);
   border-top: none;
@@ -118,12 +121,12 @@ ul {
   box-shadow: 0 2px 5px -1px rgb(232, 232, 232);
   background-color: white;
   font-weight: 700;
-  text-align: left;
+  text-align: center;
   -webkit-overflow-scrolling: touch;
 `,g=l.c.button`
   display: inline-block;
   overflow: hidden;
-  width: 15rem;
+  width: 14rem;
   padding: 8px 10px;
   font-size: 1.5rem;
   line-height: 1.6rem;
@@ -137,21 +140,39 @@ ul {
   &:hover {
     background-color: lightgray;
   }
-`;var b=function(e){const[t,n]=Object(r.useState)(e.title);return o.a.createElement(h,null,o.a.createElement(v,{type:"button",onClick:e.toggleList},o.a.createElement(m,null,t),e.isListOpen?o.a.createElement(p.a,{name:"angle-up",size:"2x"}):o.a.createElement(p.a,{name:"angle-down",size:"2x"})),e.isListOpen&&o.a.createElement(y,null,e.list.map(t=>o.a.createElement(g,{type:"button",key:t.id,onClick:()=>(t=>{const{resetThenSet:r}=e,{title:o,id:a,key:i}=t;n(o),e.setIsListOpen(!1)})(t)}," ",t.title," ",t.selected&&o.a.createElement(p.a,{name:"check"})))))},w=n(95);w.configure({endpointUrl:"https://api.airtable.com",apiKey:"keyVYdVRJdKVpuQtq"}),w.base("appk8Vq73Nru1TXvz")("Improve Exercises").select({maxRecords:3,view:"Master View"}).eachPage((function(e,t){e.forEach((function(e){console.log("Retrieved",e.get("Name"))})),t()}),(function(e){e&&console.error(e)}));const k=l.c.h1`
+`;var b=function(e){const[t,n]=Object(r.useState)(e.title);return o.a.createElement(h,null,o.a.createElement(v,{type:"button",onClick:e.toggleList},o.a.createElement("div",{style:{display:"flex",width:"15rem"}},o.a.createElement("div",{style:{flexDirection:"row",flexBasis:"100%",justifyContent:"flex-end",textAlign:"center"}},o.a.createElement(m,null,t," ")),o.a.createElement("div",{style:{flexDirection:"row",flexBasis:"auto",justifyContent1:"flex-end",marginLeft:"auto"}},e.isListOpen?o.a.createElement(p.a,{name:"angle-up",size:"2x"}):o.a.createElement(p.a,{name:"angle-down",size:"2x"})))),e.isListOpen&&o.a.createElement(y,null,e.list.map(t=>o.a.createElement(g,{type:"button",key:t.id,onClick:()=>(t=>{const r=e.resetThenSet,{title:o,id:a,key:i}=t;n(o),e.setIsListOpen(!1),r(a,i)})(t)}," ",t.title," ",t.selected&&o.a.createElement(p.a,{name:"check"})))))},w=n(95);w.configure({endpointUrl:"https://api.airtable.com",apiKey:"keyVYdVRJdKVpuQtq"});var k=w.base("appk8Vq73Nru1TXvz");const x=l.c.button`
+  padding: 10px 30px 10px 30px;
+  position: fixed;
+  top: 70vh;
+  z-index: 0;
+  font: inherit;
+  color: white;
+  background-color: #29bc90;
+  border: 0.5px solid #29bc90;
+  border-radius: 5px;
+  &:hover {
+    background-color: #219170;
+  }
+  cursor: pointer;
+`,_=l.c.h1`
   font-size: 54px;
   align-self: center;
   text-align: center;
   flex-basis: 20%;
   margin-bottom: 10px;
   color: white;
-`;l.c.select`
-  width: 80%;
-  height: 50px;
-  border-color: transparent;
-  color: gray;
-  font-family: "Roboto";
-  font-size: 26px;
-`,l.c.option`
-  background-color: white;
-  border-color: transparent;
-`;function x(e){const[t,n]=Object(r.useState)(""),[a,i]=Object(r.useState)(!1),[l,u]=Object(r.useState)(0),[s,c]=Object(r.useState)(150);return setTimeout(()=>{const r=e.dataText,o=r[l%r.length];n(a?o.substring(0,t.length-1):o.substring(0,t.length+1)),c(a?100:150),a||t!==o?a&&""===t&&(i(!1),u(l+1)):setTimeout(()=>i(!0),500)},s),o.a.createElement(k,null,o.a.createElement("span",{style:{color:"white"}},t),o.a.createElement("span",{id:"cursor"}))}var _=function(){const e=Object(r.useRef)(null),[t,n]=Object(r.useState)(!1);Object(r.useEffect)(()=>{function t(t){e.current&&!e.current.contains(t.target)&&(console.log("handleclick"),n(!1))}return document.addEventListener("mousedown",t),()=>{document.removeEventListener("mousedown",t)}},[]);const[a,i]=Object(r.useState)(""),[l,u]=Object(r.useState)([{id:0,title:"joy",selected:!1,key:"location"},{id:1,title:"creativity",selected:!1,key:"location"},{id:2,title:"connection",selected:!1,key:"location"},{id:3,title:"humor",selected:!1,key:"location"},{id:4,title:"energy",selected:!1,key:"location"},{id:5,title:"resilience",selected:!1,key:"location"},{id:6,title:"focus",selected:!1,key:"location"},{id:7,title:"self-awareness",selected:!1,key:"location"},{id:8,title:"gratitude",selected:!1,key:"location"},{id:9,title:"adaptability",selected:!1,key:"location"},{id:10,title:"achievement",selected:!1,key:"location"}]);return o.a.createElement(s,null,o.a.createElement(c,null,o.a.createElement(k,{style:{paddingTop:"2rem"}},"Today I want to improve..."),o.a.createElement(x,{dataText:["joy","creativity","connection","humor","energy","resilience","focus","self-awareness","gratitude","adaptability","achievement"]}),o.a.createElement("div",{ref:e},o.a.createElement(b,{title:"Choose Category",list:l,resetThenSet:(e,t)=>{const n=[...t];n.forEach(e=>e.selected=!1),n[e].selected=!0,i(n)},isListOpen:t,setIsListOpen:n,toggleList:()=>{n(!t)}}))),o.a.createElement(f,null,o.a.createElement("p",null,"Bye")))};i.a.render(o.a.createElement(o.a.Fragment,null,o.a.createElement(l.a,{theme:{colors:{primary:"royalblue",secondary:"teal",text:"black"},fontSize:{xl:"2.4rem",lg:"1.8rem",md:"1.3rem",nm:"1rem",sm:"0.75rem"},bg:"#FEFEFE",color:"#e1e1e1",primary:"#8257e6"}},o.a.createElement(u,null),o.a.createElement(_,null))),document.getElementById("root"))}]);
+`,S=l.c.div`
+  display: flex;
+  flex-direction: column;
+  width: 55vw;
+  height: auto;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #a5ebd6;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`,E=l.c.p`
+  font-size: 2vh;
+  line-height: 3vh;
+`;function C(e){const[t,n]=Object(r.useState)(""),[a,i]=Object(r.useState)(!1),[l,u]=Object(r.useState)(0),[s,c]=Object(r.useState)(150);return setTimeout(()=>{const r=e.dataText,o=r[l%r.length];n(a?o.substring(0,t.length-1):o.substring(0,t.length+1)),c(a?100:150),a||t!==o?a&&""===t&&(i(!1),u(l+1)):setTimeout(()=>i(!0),500)},s),o.a.createElement(_,null,o.a.createElement("span",{style:{color:"white"}},t),o.a.createElement("span",{id:"cursor"}))}var O=function(){const e=Object(r.useRef)(null),[t,n]=Object(r.useState)(!1),[a,i]=Object(r.useState)(""),[l,u]=Object(r.useState)({fields:{Name:"",Description:"Choose a category and click go to start!",Notes:""}});Object(r.useEffect)(()=>{function t(t){e.current&&!e.current.contains(t.target)&&(console.log("handleclick"),n(!1))}return document.addEventListener("mousedown",t),()=>{document.removeEventListener("mousedown",t)}},[]);const[d,p]=Object(r.useState)([{id:0,title:"joy",selected:!1,key:"Joy"},{id:1,title:"creativity",selected:!1,key:"Creativity"},{id:2,title:"connection",selected:!1,key:"Connection"},{id:3,title:"humor",selected:!1,key:"Humor"},{id:4,title:"energy",selected:!1,key:"Energy"},{id:5,title:"resilience",selected:!1,key:"Resilience"},{id:6,title:"focus",selected:!1,key:"Focus"},{id:7,title:"self-awareness",selected:!1,key:"Self-Awareness"},{id:8,title:"gratitude",selected:!1,key:"Gratitude"},{id:9,title:"adaptability",selected:!1,key:"Adaptability"},{id:10,title:"achievement",selected:!1,key:"Achievement"}]);return o.a.createElement(s,null,o.a.createElement(c,null,o.a.createElement(_,{style:{paddingTop:"2rem"}},"Today I want to improve..."),o.a.createElement(C,{dataText:["joy","creativity","connection","humor","energy","resilience","focus","self-awareness","gratitude","adaptability","achievement"]}),o.a.createElement("div",{ref:e},o.a.createElement(b,{title:"Choose Category",list:d,resetThenSet:(e,t)=>{i(t)},isListOpen:t,setIsListOpen:n,toggleList:()=>{n(!t)}})),o.a.createElement(x,{onClick:()=>(console.log("key",a),async function(){let e=[];await k("Improve Exercises").select({view:"Master View"}).eachPage((function(t,n){t.forEach((function(t){let n=t.get("Category");n&&n.includes(a)&&e.push(t)})),n()}),(function(t){if(!t){if(!e.length)return;console.log("arr",e);let t=Math.floor(Math.random()*e.length);return console.log("idx",t),u(e[t]),void console.log(l)}console.error(t)}))}())},"Go!")),o.a.createElement(f,null,o.a.createElement(S,null,o.a.createElement("div",null,o.a.createElement("h1",null,l.fields.Name)),o.a.createElement("div",null,o.a.createElement(E,null,l.fields.Description)))))};i.a.render(o.a.createElement(o.a.Fragment,null,o.a.createElement(l.a,{theme:{colors:{primary:"royalblue",secondary:"teal",text:"black"},fontSize:{xl:"2.4rem",lg:"1.8rem",md:"1.3rem",nm:"1rem",sm:"0.75rem"},bg:"#FEFEFE",color:"#e1e1e1",primary:"#8257e6"}},o.a.createElement(u,null),o.a.createElement(O,null))),document.getElementById("root"))}]);

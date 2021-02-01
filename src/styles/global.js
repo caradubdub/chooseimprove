@@ -13,7 +13,7 @@ body {
   color: ${(props) => props.theme.color};
   transition: all 0.15s linear;
   font-size: calc(14px + .5vw);
-  font-family: 'Roboto', 'sans-serif';
+  font-family: 'Open Sans', sans-serif;
   line-height: 1.7;
   height: 100vh;
 }

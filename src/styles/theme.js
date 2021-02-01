@@ -11,7 +11,7 @@ export const theme = {
     nm: "1rem",
     sm: "0.75rem",
   },
-  bg: "#FEFEFE",
-  color: "#e1e1e1",
+  bg: "#FFFBF5",
+  color: "#12355B",
   primary: "#8257e6",
 };

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import FontAwesome from "react-fontawesome";
 
 const DDWrapper = styled.div`
-  position: relative;
   width: 222px;
   font-size: 1.2rem;
   user-select: none;
@@ -31,7 +30,7 @@ const DDHeadTitle = styled.div`
 `;
 
 const DDList = styled.div`
-  position: relative;
+  position: fixed;
   overflow-y: auto;
   z-index: 10;
   width: 15rem;
