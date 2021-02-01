@@ -13,7 +13,7 @@ import Description from "./components/Description";
 console.log(process.env);
 var Airtable = require("airtable");
 const base = new Airtable({
-  apiKey: "",
+  apiKey: process.env.AIRTABLE_API_KEY,
 }).base("appk8Vq73Nru1TXvz");
 
 const StyledButton = styled.button`
@@ -40,8 +40,7 @@ const StyledText = styled.h1`
   margin-bottom: 10px;
   color: #12355b;
 `;
-//bring in the width limit of the card so there's no need to add background color, but have the abiilty to add background color
-//
+
 const StyledCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -165,16 +164,13 @@ function App() {
               return;
             } else {
               if (!arr.length) return;
-              console.log("arr", arr);
               let idx = Math.floor(Math.random() * arr.length);
-              console.log("idx", idx);
               setPrompt(arr[idx]);
-              console.log("description", prompt.fields.Description);
+              console.log("notes", prompt.fields.Notes);
               // let split = prompt.fields.Description.split("");
               // console.log("split1", split);
               // console.log("type of field", typeof prompt.fields.Description);
               let newstr = prompt.fields.Description.split(/\n/gi);
-              console.log(newstr);
               setDesc(newstr);
               return;
             }
@@ -287,23 +283,7 @@ function App() {
             <StyledText style={{ paddingTop: "2rem" }}>
               Today I want to improve...
             </StyledText>
-            {
-              // <Typer
-              //   dataText={[
-              //     "joy",
-              //     "creativity",
-              //     "connection",
-              //     "humor",
-              //     "energy",
-              //     "resilience",
-              //     "focus",
-              //     "self-awareness",
-              //     "gratitude",
-              //     "adaptability",
-              //     "achievement",
-              //   ]}
-              // />
-            }
+
             <div>
               <img
                 style={{ width: "30vw" }}
@@ -331,9 +311,6 @@ function App() {
             <h1>{prompt.fields.Name}</h1>
             <Description description={prompt.fields.Description} />
             <StyledP>{prompt.fields.Notes}</StyledP>
-            {
-              //try to add line breaks to description with string manipulationg
-            }
           </div>
         </StyledCard>
       </StyledRightPanel>

@@ -8,11 +8,10 @@ const StyledP = styled.p`
 function Description(props) {
   //const items = new Array((props.description).length).fill('');
   let descriptions = props.description.split(/\n/gi);
-  console.log("props.description", descriptions);
   const desc = descriptions.map((para, i) => {
     return (
-      <div>
-        <p>{para}</p>
+      <div style={{ marginBottom: "3vh" }}>
+        <StyledP>{para}</StyledP>
       </div>
     );
   });
