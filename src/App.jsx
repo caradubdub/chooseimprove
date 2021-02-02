@@ -10,10 +10,10 @@ import DropDown from "./components/DropDown";
 import Description from "./components/Description";
 const dotenv = require("dotenv").config();
 let key = process.env.AIRTABLE_API_KEY;
-var Airtable = require("airtable");
-const base = new Airtable({
-  apiKey: key,
-}).base("appk8Vq73Nru1TXvz");
+
+const Airtable = require("airtable");
+
+const base = new Airtable.base("appk8Vq73Nru1TXvz");
 
 const StyledButton = styled.button`
   padding: 8px 20px 8px 20px;
