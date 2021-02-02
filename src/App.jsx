@@ -10,7 +10,6 @@ import DropDown from "./components/DropDown";
 import Description from "./components/Description";
 const dotenv = require("dotenv").config();
 let key = process.env.AIRTABLE_API_KEY;
-console.log(process.env);
 var Airtable = require("airtable");
 const base = new Airtable({
   apiKey: key,
