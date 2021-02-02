@@ -1,20 +1,24 @@
 const path = require("path");
-const dotenv = require("dotenv").config({ path: __dirname + "/.env" });
 
 module.exports = {
   context: __dirname,
   entry: "./src/index.js",
-  output: {
-    path: path.resolve(__dirname, "build"),
-    filename: "bundle.js",
-    publicPath: "/",
-  },
-  mode: process.env.NODE_ENV,
   node: {
     fs: "empty",
   },
+  output: {
+    path: path.resolve(__dirname, "build"),
+    filename: "bundle.js",
+  },
+  mode: process.env.NODE_ENV,
   devServer: {
-    historyApiFallback: true,
+    open: true,
+    publicPath: "/build",
+    proxy: {
+      "/api": {
+        target: "http://localhost:3000",
+      },
+    },
   },
   module: {
     rules: [

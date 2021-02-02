@@ -1,4 +1,3 @@
-require("dotenv").config();
 import React, { useEffect, useState, useRef } from "react";
 import GlobalStyle from "./styles/global";
 import {
@@ -9,11 +8,12 @@ import {
 import styled from "styled-components";
 import DropDown from "./components/DropDown";
 import Description from "./components/Description";
-
+const dotenv = require("dotenv").config();
+let key = process.env.AIRTABLE_API_KEY;
 console.log(process.env);
 var Airtable = require("airtable");
 const base = new Airtable({
-  apiKey: process.env.AIRTABLE_API_KEY,
+  apiKey: key,
 }).base("appk8Vq73Nru1TXvz");
 
 const StyledButton = styled.button`
