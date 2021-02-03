@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React from "react";
 
 const StyledP = styled.p`
-  font-size: 2vh;
+  font-size: 1.5vh;
   line-height: 3vh;
 `;
 function Description(props) {
@@ -10,7 +10,7 @@ function Description(props) {
   let descriptions = props.description.split(/\n/gi);
   const desc = descriptions.map((para, i) => {
     return (
-      <div style={{ marginBottom: "3vh" }}>
+      <div style={{ marginBottom: "2vh" }}>
         <StyledP>{para}</StyledP>
       </div>
     );

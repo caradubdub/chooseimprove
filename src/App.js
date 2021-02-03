@@ -1,18 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
 import GlobalStyle from "./styles/global";
-import {
-  StyledPage,
-  StyledTopPanel,
-  StyledRightPanel,
-} from "../src/styles/styled";
+import { StyledPage, StyledTopPanel, StyledRightPanel } from "./styles/styled";
 import styled from "styled-components";
 import DropDown from "./components/DropDown";
 import Description from "./components/Description";
-const dotenv = require("dotenv").config();
-let key = process.env.AIRTABLE_API_KEY;
 
 const Airtable = require("airtable");
-
+Airtable.configure({
+  endpointUrl: "https://api.airtable.com",
+  apiKey: process.env.AIRTABLE_API_KEY,
+});
 const base = new Airtable.base("appk8Vq73Nru1TXvz");
 
 const StyledButton = styled.button`
@@ -307,7 +304,9 @@ function App() {
       <StyledRightPanel>
         <StyledCard>
           <div>
-            <h1>{prompt.fields.Name}</h1>
+            <h1 style={{ fontSize: "3vh", marginBottom: "2vh" }}>
+              {prompt.fields.Name}
+            </h1>
             <Description description={prompt.fields.Description} />
             <StyledP>{prompt.fields.Notes}</StyledP>
           </div>

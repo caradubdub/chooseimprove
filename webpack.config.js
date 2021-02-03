@@ -1,11 +1,8 @@
 const path = require("path");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
-  context: __dirname,
   entry: "./src/index.js",
-  node: {
-    fs: "empty",
-  },
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "bundle.js",
@@ -14,11 +11,6 @@ module.exports = {
   devServer: {
     open: true,
     publicPath: "/build",
-    proxy: {
-      "/api": {
-        target: "http://localhost:3000",
-      },
-    },
   },
   module: {
     rules: [
@@ -37,4 +29,5 @@ module.exports = {
       },
     ],
   },
+  plugins: [new Dotenv()],
 };

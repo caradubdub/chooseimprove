@@ -7,14 +7,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production nodemon server.js",
     "build": "NODE_ENV=production webpack",
-    "dev": "NODE_ENV=development webpack serve & nodemon server.js"    
+    "dev": "NODE_ENV=development webpack serve & nodemon server.js"
   },
+  "browserslist": [
+    "last 1 Chrome version"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "airtable": "^0.10.1",
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "path": "^0.12.7",
     "react": "^17.0.1",
@@ -26,6 +28,7 @@
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
     "babel-loader": "^8.2.2",
+    "dotenv-webpack": "^6.0.0",
     "nodemon": "^2.0.6",
     "react-fontawesome": "^1.7.1",
     "webpack": "^4.43.0",
