@@ -1,5 +1,4 @@
 const PORT = process.env.PORT || 3000;
-const { CONNREFUSED } = require("dns");
 const express = require("express");
 const path = require("path");
 
