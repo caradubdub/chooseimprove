@@ -32,7 +32,7 @@ module.exports = {
   },
   plugins: [
     new Dotenv(),
-    new webpack.DefinePlugin({
+    new DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify("production"),
         AIRTABLE_API_KEY: JSON.stringify(process.env.AIRTABLE_API_KEY),
