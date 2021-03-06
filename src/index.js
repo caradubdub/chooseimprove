@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM, { render } from "react-dom";
 import App from "./App.js";
 import GlobalStyle from "./styles/global";
 import { theme } from "../src/styles/theme";

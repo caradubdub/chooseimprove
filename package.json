@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production node server.js",
     "build": "NODE_ENV=production webpack",
-    "dev": "NODE_ENV=development webpack serve & nodemon server.js"
+    "dev": "NODE_ENV=development webpack serve",
+    "heroku-postbuild": "webpack -p"
   },
   "browserslist": [
     "last 1 Chrome version"
@@ -31,6 +32,7 @@
     "dotenv-webpack": "^6.0.0",
     "nodemon": "^2.0.6",
     "react-fontawesome": "^1.7.1",
+    "url-loader": "^4.1.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^4.3.0",
     "webpack-dev-server": "^3.11.0"

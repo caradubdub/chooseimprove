@@ -1,9 +1,14 @@
+//pull in video from link to demo and embedding under everything
+//capture other links in description?
+//try to capture italics and other txt formatting "I am that" connection, joy self-awareness, gratitude
+
 import React, { useEffect, useState, useRef } from "react";
 import GlobalStyle from "./styles/global";
 import { StyledPage, StyledTopPanel, StyledRightPanel } from "./styles/styled";
 import styled from "styled-components";
 import DropDown from "./components/DropDown";
 import Description from "./components/Description";
+import Links from "./components/Links";
 
 const Airtable = require("airtable");
 Airtable.configure({
@@ -14,6 +19,7 @@ const base = new Airtable.base("appk8Vq73Nru1TXvz");
 
 const StyledButton = styled.button`
   padding: 8px 20px 8px 20px;
+  margin-left: 40px;
   top: 70vh;
   z-index: 0;
   font: inherit;
@@ -32,15 +38,18 @@ const StyledText = styled.h1`
   font-size: 30px;
   align-self: center;
   text-align: center;
-  flex-basis: 20%;
+  flex-basis: 30%;
   margin-bottom: 10px;
+  font-family: inherit;
   color: #12355b;
+  padding-top: 1rem;
 `;
 
 const StyledCard = styled.div`
   display: flex;
   flex-direction: column;
   width: 50vw;
+  minwidth: 500px;
   height: auto;
   padding: auto;
   border-radius: 20px;
@@ -50,46 +59,36 @@ const StyledCard = styled.div`
   text-align: center;
 `;
 const StyledP = styled.p`
-  font-size: 2vh;
-  line-height: 3vh;
+  font-size: 1rem;
+  line-height: 1.5rem;
 `;
 
-function Typer(props) {
-  const [text, setText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(150);
+const StyledTopColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  @media only screen and (max-width: 500px) {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+`;
 
-  const handleType = () => {
-    const dataText = props.dataText;
-    const i = loopNum % dataText.length;
-    const fullText = dataText[i];
+const StyledTopRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 20px;
+`;
 
-    setText(
-      isDeleting
-        ? fullText.substring(0, text.length - 1)
-        : fullText.substring(0, text.length + 1)
-    );
-
-    setTypingSpeed(isDeleting ? 100 : 150);
-
-    if (!isDeleting && text === fullText) {
-      setTimeout(() => setIsDeleting(true), 500);
-    } else if (isDeleting && text === "") {
-      setIsDeleting(false);
-      setLoopNum(loopNum + 1);
-    }
-  };
-
-  setTimeout(handleType, typingSpeed);
-
-  return (
-    <StyledText>
-      <span style={{ color: "#12355B" }}>{text}</span>
-      <span id="cursor" />
-    </StyledText>
-  );
-}
+const StyledGif = styled.img`
+  width: 250px;
+  @media only screen and (max-width: 500px) {
+    width: 50vw;
+  }
+`;
 
 function App() {
   const wrapperRef = useRef(null);
@@ -105,6 +104,7 @@ function App() {
   const [description, setDesc] = useState([
     "Choose a category and click go to start!",
   ]);
+  const [linksarr, setLinksArr] = useState([]);
 
   useEffect(() => {
     /**
@@ -162,10 +162,10 @@ function App() {
               if (!arr.length) return;
               let idx = Math.floor(Math.random() * arr.length);
               setPrompt(arr[idx]);
-              console.log("notes", prompt.fields.Notes);
               // let split = prompt.fields.Description.split("");
               // console.log("split1", split);
               // console.log("type of field", typeof prompt.fields.Description);
+
               let newstr = prompt.fields.Description.split(/\n/gi);
               setDesc(newstr);
               return;
@@ -262,32 +262,30 @@ function App() {
         }}
       >
         <img
-          style={{ width: "20vw", padding: "10px 0 10px 20px" }}
+          style={{
+            width: "20%",
+            minWidth: "180px",
+            padding: "10px 0 10px 20px",
+          }}
           src="https://static1.squarespace.com/static/5fdbcb0c485f552352d42446/t/5feb4ef5be26463ba9454d6b/1610900141277/?format=1500w"
         />
       </div>
       <StyledTopPanel>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
-              alignItems: "center",
-            }}
-          >
-            <StyledText style={{ paddingTop: "2rem" }}>
-              Today I want to improve...
-            </StyledText>
+        <StyledTopColumn>
+          <StyledTopRow>
+            <StyledText>Today I want to improve...</StyledText>
 
-            <div>
-              <img
-                style={{ width: "30vw" }}
-                src="https://images.squarespace-cdn.com/content/v1/5fdbcb0c485f552352d42446/1610895013646-BFWFN6UBFIXP13ATSXXW/ke17ZwdGBToddI8pDm48kL8B3dm5W1mn-onLqnk26fJZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIK_FmWmlZglY2AzqA3xXvLLNSddWHUhxiZ7r7T7sSjs8/improve-home2.gif"
-                alt="improve-home2.gif"
-              />
-            </div>
-            <div ref={wrapperRef}>
+            <StyledGif
+              src="https://images.squarespace-cdn.com/content/v1/5fdbcb0c485f552352d42446/1610895013646-BFWFN6UBFIXP13ATSXXW/ke17ZwdGBToddI8pDm48kL8B3dm5W1mn-onLqnk26fJZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIK_FmWmlZglY2AzqA3xXvLLNSddWHUhxiZ7r7T7sSjs8/improve-home2.gif"
+              alt="improve-home2.gif"
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
               <DropDown
                 title="Choose Category"
                 list={location}
@@ -296,19 +294,33 @@ function App() {
                 setIsListOpen={setIsListOpen}
                 toggleList={toggleList}
               />
+              <StyledButton onClick={handleClick}>Go!</StyledButton>
             </div>
-            <StyledButton onClick={handleClick}>Go!</StyledButton>
-          </div>
-        </div>
+          </StyledTopRow>
+        </StyledTopColumn>
       </StyledTopPanel>
       <StyledRightPanel>
         <StyledCard>
-          <div>
-            <h1 style={{ fontSize: "3vh", marginBottom: "2vh" }}>
+          <div style={{ paddingBottom: "10px" }}>
+            <h1
+              style={{
+                fontSize: "1.5rem",
+                marginBottom: "2rem",
+                marginTop: "2rem",
+              }}
+            >
               {prompt.fields.Name}
             </h1>
-            <Description description={prompt.fields.Description} />
+            <Description
+              description={prompt.fields.Description}
+              notes={prompt.fields.Notes}
+            />
             <StyledP>{prompt.fields.Notes}</StyledP>
+
+            <Links
+              description={prompt.fields.Description}
+              notes={prompt.fields.Notes}
+            />
           </div>
         </StyledCard>
       </StyledRightPanel>

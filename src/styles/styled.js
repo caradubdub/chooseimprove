@@ -6,15 +6,24 @@ export const StyledPage = styled.div`
   flex: 1 1 auto;
   height: 100vh;
   width: 100%;
+  font-family: inherit;
 `;
 
 export const StyledTopPanel = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  flex: 1 1 25%;
+  justify-content: space-around;
+  flex: 1 1;
   box-shadow: 0 9px 5px -2px lightgray;
   order: 1;
+  flex-wrap: wrap;
+  z-index: 1;
+  @media only screen and (max-width: 500px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const StyledRightPanel = styled.div`
@@ -28,5 +37,4 @@ export const StyledRightPanel = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  z-index: -1;
 `;

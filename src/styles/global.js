@@ -1,6 +1,8 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, injectGlobal } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+
+
 *, *:after, *:before {
   box-sizing: border-box;
   margin: 0;
@@ -9,7 +11,8 @@ const GlobalStyle = createGlobalStyle`
 }
 
 body {
-  background: ${(props) => props.theme.bg};
+
+   background: ${(props) => props.theme.bg};
   color: ${(props) => props.theme.color};
   transition: all 0.15s linear;
   font-size: calc(14px + .5vw);

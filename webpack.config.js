@@ -4,7 +4,8 @@ const Dotenv = require("dotenv-webpack");
 module.exports = {
   entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, "build"),
+    path: __dirname,
+    publicPath: "/",
     filename: "bundle.js",
   },
   mode: process.env.NODE_ENV,
