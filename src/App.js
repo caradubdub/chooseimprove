@@ -10,13 +10,6 @@ import DropDown from "./components/DropDown";
 import Description from "./components/Description";
 import Links from "./components/Links";
 
-const Airtable = require("airtable");
-Airtable.configure({
-  endpointUrl: "https://api.airtable.com",
-  apiKey: process.env.AIRTABLE_API_KEY,
-});
-const base = new Airtable.base("appk8Vq73Nru1TXvz");
-
 const StyledButton = styled.button`
   padding: 8px 20px 8px 20px;
   margin-left: 40px;
@@ -130,50 +123,23 @@ function App() {
   };
   const handleClick = () => {
     console.log("key", key);
-    async function retfunc() {
-      let arr = [];
-      //need to add async functionality to wait to collect results before populating
-      await base("Improve Exercises")
-        .select({
-          view: "Master View",
-        })
-        .eachPage(
-          function page(records, fetchNextPage) {
-            // This function (`page`) will get called for each page of records.
-            records.forEach(function (record) {
-              let areas = record.get("Category");
-              if (areas) {
-                if (areas.includes(key)) {
-                  arr.push(record);
-                }
-              }
-            });
+    ///airtable
+    const body = { key: key };
+    fetch(`/airtable/results`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setPrompt(data);
+      })
+      .catch((err) => console.log(err));
 
-            // To fetch the next page of records, call `fetchNextPage`.
-            // If there are more records, `page` will get called again.
-            // If there are no more records, `done` will get called.
-            fetchNextPage();
-          },
-          function done(err) {
-            if (err) {
-              console.error(err);
-              return;
-            } else {
-              if (!arr.length) return;
-              let idx = Math.floor(Math.random() * arr.length);
-              setPrompt(arr[idx]);
-              // let split = prompt.fields.Description.split("");
-              // console.log("split1", split);
-              // console.log("type of field", typeof prompt.fields.Description);
-
-              let newstr = prompt.fields.Description.split(/\n/gi);
-              setDesc(newstr);
-              return;
-            }
-          }
-        );
-    }
-    return retfunc();
+    // let newstr = prompt.fields.Description.split(/\n/gi);
+    // setDesc(newstr);
   };
   const [location, setLocation] = useState([
     {
