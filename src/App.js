@@ -208,6 +208,12 @@ function App() {
       selected: false,
       key: "Achievement",
     },
+    {
+      id: 11,
+      title: "anything!",
+      selected: false,
+      key: "Anything!",
+    },
   ]);
 
   const resetThenSet = (id, key) => {
