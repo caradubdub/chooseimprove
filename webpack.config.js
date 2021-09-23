@@ -1,18 +1,24 @@
 const path = require("path");
-const Dotenv = require("dotenv-webpack");
-const webpack = require("webpack");
+const dotenv = require('dotenv');
+dotenv.config();
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+
 
 module.exports = {
   entry: "./src/index.js",
   output: {
-    path: __dirname,
-    publicPath: "/",
-    filename: "bundle.js",
+    filename: 'bundle.[contenthash].js',
+    path: path.resolve(__dirname, 'build'),
+    clean: true
   },
   mode: process.env.NODE_ENV,
   devServer: {
-    open: true,
-    publicPath: "/build",
+    proxy:{
+      '/*': 'http://localhost:3000'
+    },
+    hot: true,
+    open: true
   },
   module: {
     rules: [
@@ -32,12 +38,8 @@ module.exports = {
     ],
   },
   plugins: [
-    new Dotenv(),
-    new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("production"),
-        AIRTABLE_API_KEY: JSON.stringify(process.env.AIRTABLE_API_KEY),
-      },
+    new HtmlWebpackPlugin({
+      template: './index.html'
     }),
   ],
 };
