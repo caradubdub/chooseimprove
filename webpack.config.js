@@ -15,10 +15,10 @@ module.exports = {
   mode: process.env.NODE_ENV,
   devServer: {
     proxy:{
-      '/*': 'http://localhost:3000'
+      '/': 'http://localhost:3000',
     },
     hot: true,
-    open: true
+    open: true,
   },
   module: {
     rules: [
