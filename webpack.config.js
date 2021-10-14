@@ -12,7 +12,6 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     clean: true
   },
-  mode: process.env.NODE_ENV,
   devServer: {
     proxy:{
       '/': 'http://localhost:3000',
@@ -43,7 +42,7 @@ module.exports = {
     }),
       new Dotenv(),
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        'process.env.NODE_ENV': process.env.NODE_ENV === 'production' ? JSON.stringify('production') : JSON.stringify('development'),
       }),
     ],
 };
