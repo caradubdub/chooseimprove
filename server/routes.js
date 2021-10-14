@@ -43,7 +43,6 @@ airtableRouter.post("/results", (req, res) => {
             return res.statusMessage(200).json("there are no results");
           let idx = Math.floor(Math.random() * arr.length);
 
-          //res.locals.results = arr[idx];
           return res.status(200).json(arr[idx]);
         }
       }

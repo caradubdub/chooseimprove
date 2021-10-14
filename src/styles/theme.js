@@ -1,4 +1,5 @@
 export const theme = {
+  //add
   colors: {
     primary: "royalblue",
     secondary: "teal",

@@ -4,7 +4,7 @@ import App from "./App.js";
 import GlobalStyle from "./styles/global";
 import { theme } from "../src/styles/theme";
 import { ThemeProvider } from "styled-components";
-
+//add
 ReactDOM.render(
   <>
     <ThemeProvider theme={theme}>
