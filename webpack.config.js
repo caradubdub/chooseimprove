@@ -1,8 +1,8 @@
 const path = require("path");
 const webpack = require('webpack');
-const Dotenv = require('dotenv-webpack');
+const Dotenv = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// add
+
 
 
 module.exports = {
@@ -43,10 +43,7 @@ module.exports = {
     }),
       new Dotenv(),
       new webpack.DefinePlugin({
-        "process.env": {
-          NODE_ENV: JSON.stringify("production"),
-          AIRTABLE_API_KEY: JSON.stringify(process.env.AIRTABLE_API_KEY),
-        },
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       }),
     ],
 };

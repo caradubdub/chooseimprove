@@ -1,7 +1,11 @@
 const express = require("express");
+
+const dotenv = require('dotenv');
+dotenv.config();
+
 const airtableRouter = express.Router();
 
-
+console.log('airtable',process.env.AIRTABLE_API_KEY, 'mode', process.env.NODE_ENV);
 const Airtable = require("airtable");
 Airtable.configure({
   endpointUrl: "https://api.airtable.com",
