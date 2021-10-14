@@ -23,6 +23,7 @@
     "airtable": "^0.10.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
+    "dotenv-webpack": "^7.0.3",
     "express": "^4.17.1",
     "path": "^0.12.7",
     "react": "^17.0.1",
