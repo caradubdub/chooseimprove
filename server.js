@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+const cors = require('cors');
 dotenv.config();
 
 const express = require("express");
@@ -9,6 +10,7 @@ const airtableRouter = require("./server/routes");
 
 const PORT = process.env.PORT||8080;
 
+app.use(cors());
 
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
