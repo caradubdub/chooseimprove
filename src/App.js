@@ -1,7 +1,7 @@
 //pull in video from link to demo and embedding under everything
 //capture other links in description?
 //try to capture italics and other txt formatting "I am that" connection, joy self-awareness, gratitude
-
+//add
 import React, { useEffect, useState, useRef } from "react";
 import GlobalStyle from "./styles/global";
 import { StyledPage, StyledTopPanel, StyledRightPanel } from "./styles/styled";

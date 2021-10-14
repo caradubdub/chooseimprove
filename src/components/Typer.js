@@ -1,4 +1,5 @@
 function Typer(props) {
+  //add
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);

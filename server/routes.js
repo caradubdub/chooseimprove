@@ -1,8 +1,11 @@
 const express = require("express");
+
+const dotenv = require('dotenv');
+dotenv.config();
+
 const airtableRouter = express.Router();
 
-const dotenv = require("dotenv").config();
-
+console.log('airtable',process.env.AIRTABLE_API_KEY, 'mode', process.env.NODE_ENV);
 const Airtable = require("airtable");
 Airtable.configure({
   endpointUrl: "https://api.airtable.com",
@@ -44,7 +47,6 @@ airtableRouter.post("/results", (req, res) => {
             return res.statusMessage(200).json("there are no results");
           let idx = Math.floor(Math.random() * arr.length);
 
-          //res.locals.results = arr[idx];
           return res.status(200).json(arr[idx]);
         }
       }
